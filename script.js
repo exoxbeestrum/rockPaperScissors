@@ -1,23 +1,16 @@
-document.querySelectorAll("button").forEach((button) => {
+//PLAYER/BUTTON LISTENER
+document.querySelectorAll(".button").forEach((button) => {
   button.addEventListener("click", () => {
-    const fired_button = button.value;
-    console.log(fired_button);
+    const playerButton = button.value;
+    console.log(playerButton);
+    nextStep();
   });
 });
 
-/*
-function playerChoice() {
-  let valueChoice = document.getElementById("choice").value;
-  console.log(valueChoice);
-  document.getElementById("result").innerHTML = valueChoice;
+//COMPUTER RANDOM CHOICE
+function nextStep() {
+  console.log('CompChoice')
 }
-*/
-/* PLAYGROUND CODE
-function myFunction() {
-  var x = document.getElementById("myText").value;
-  document.getElementById("demo").innerHTML = x;
-}
-*/
 
 /* SUPPLIED CODE...
 function playRound(playerSelection, computerSelection) {
