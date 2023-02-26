@@ -2,6 +2,10 @@
 const optionsArray = ["rock", "paper", "scissors"]; //SET VARIABLES
 const buttonCount = document.getElementsByClassName("button"); //GET # OF BUTTONS
 
+//GLOBAL VARIABLES
+let playerSelection = null;
+let computerSelection = null;
+
 //POPULATE BUTTONS W/ CLASS NAME
 for (let i = 0; i < optionsArray.length; i++) {
   //COUNT .button INSTANCES
@@ -16,15 +20,15 @@ for (let i = 0; i < optionsArray.length; i++) {
 //PLAYER/BUTTON LISTENER
 document.querySelectorAll(".button").forEach((button) => {
   button.addEventListener("click", () => {
-    const playerButton = button.value;
-    console.log(playerButton);
-    nextStep();
+    playerSelection = button.value;
+    getComputerChoice();
   });
 });
 
 //COMPUTER RANDOM CHOICE
-function nextStep() {
-  console.log("CompChoice");
+function getComputerChoice() {
+  let i = Math.floor(Math.random() * optionsArray.length);
+  computerSelection = optionsArray[i];
 }
 
 /* SUPPLIED CODE...
