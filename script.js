@@ -1,10 +1,9 @@
-//SET VARIABLES
+//SET GLOBAL VARIABLES
 const optionsArray = ["rock", "paper", "scissors"]; //SET VARIABLES
 const buttonCount = document.getElementsByClassName("button"); //GET # OF BUTTONS
+let playerSelection = null;
+let computerSelection = null;
 
-//GLOBAL VARIABLES
-var playerSelection = null;
-var computerSelection = null;
 
 //POPULATE BUTTONS W/ CLASS NAME
 for (let i = 0; i < optionsArray.length; i++) {
@@ -17,33 +16,40 @@ for (let i = 0; i < optionsArray.length; i++) {
   //ASSIGN BUTTON TEXT
   document.getElementsByClassName("button")[i].innerHTML = optionsArray[i];
 }
+
 //PLAYER/BUTTON LISTENER
 document.querySelectorAll(".button").forEach((button) => {
   button.addEventListener("click", () => {
     playerSelection = button.value;
-    getComputerChoice();
+    getComputerChoice(playerSelection);
   });
 });
 
-//COMPUTER RANDOM CHOICE
-function getComputerChoice() {
+//GET COMPUTER CHOICE
+function getComputerChoice(playerSelection) {
   let i = Math.floor(Math.random() * optionsArray.length);
   computerSelection = optionsArray[i];
-  playRound();
+  playRound(playerSelection, computerSelection);
 }
 
+//PLAY THE ROUND
 function playRound(playerSelection, computerSelection) {
-  console.log(playerSelection);
-  console.log(computerSelection);
+  let playerIndex = optionsArray.indexOf(playerSelection);
+  let computerIndex = optionsArray.indexOf(computerSelection);
+  console.log("playr " + playerIndex);
+  console.log("comp " + computerIndex);
+  if (playerIndex > computerIndex) {
+    console.log("player win");
+  } else if (playerIndex < computerIndex) {
+    console.log("comp win");
+  } else {
+    console.log("tie");
+  }
 }
-
 /* SUPPLIED CODE...
 function playRound(playerSelection, computerSelection) {
   // your code here!
 }
-
-const playerSelection = "rock";
-const computerSelection = getComputerChoice();
 
 console.log(playRound(playerSelection, computerSelection));
 */
