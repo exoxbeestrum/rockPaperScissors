@@ -7,6 +7,9 @@ let computerSelection = null;
 let playerScore = 0;
 let computerScore = 0;
 
+//HIDE RESET BUTTON
+document.getElementById("reset").style.visibility = "hidden";
+
 //POPULATE BUTTONS W/ CLASS NAME
 for (let i = 0; i < optionsArray.length; i++) {
   //COUNT .button INSTANCES
@@ -28,6 +31,8 @@ document.querySelectorAll(".button").forEach((button) => {
   button.addEventListener("click", () => {
     playerSelection = button.value;
     getComputerChoice(playerSelection);
+    document.getElementById("player-choice-heading").innerHTML =
+      "Your Choice: " + playerSelection;
   });
 });
 
@@ -35,6 +40,8 @@ document.querySelectorAll(".button").forEach((button) => {
 function getComputerChoice(playerSelection) {
   let i = Math.floor(Math.random() * optionsArray.length);
   computerSelection = optionsArray[i];
+  document.getElementById("comp-choice-heading").innerHTML =
+    "Computer's Choice: " + computerSelection;
   playRound(playerSelection, computerSelection);
 }
 
@@ -71,13 +78,29 @@ function playRound(playerSelection, computerSelection) {
   function evalScore(playerScore, computerScore) {
     document.getElementById("player-score").innerHTML = playerScore;
     document.getElementById("comp-score").innerHTML = computerScore;
-    //DECLARES WINNER
-    if (playerScore == 5 || computerScore == 5) {
-      document.getElementById("win").innerHTML = "WIN!!!";
-      //DISABLE BUTTONS
+    //PLAYER WINS
+    if (playerScore == 5) {
+      document.getElementById("win").innerHTML = "YOU WIN!!!";
+      endGame();
+    }
+    //PLAYER LOSES
+    if (computerScore == 5) {
+      document.getElementById("win").innerHTML = "YOU LOSE!!!";
+      endGame();
+    }
+    //DISABLE BUTTONS
+    function endGame() {
       for (let i = 0; i < optionsArray.length; i++) {
         document.getElementsByClassName("button")[i].disabled = true;
+        document.getElementById("reset").innerHTML = "Play Again?";
+        document.getElementById("reset").style.visibility = "visible";
       }
     }
   }
 }
+
+//RESET GAME
+document.getElementById("reset").addEventListener("click", () => {
+  console.log("reset");
+  location.reload();
+});
