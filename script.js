@@ -3,8 +3,8 @@ const optionsArray = ["rock", "paper", "scissors"]; //SET VARIABLES
 const buttonCount = document.getElementsByClassName("button"); //GET # OF BUTTONS
 
 //GLOBAL VARIABLES
-let playerSelection = null;
-let computerSelection = null;
+var playerSelection = null;
+var computerSelection = null;
 
 //POPULATE BUTTONS W/ CLASS NAME
 for (let i = 0; i < optionsArray.length; i++) {
@@ -29,6 +29,12 @@ document.querySelectorAll(".button").forEach((button) => {
 function getComputerChoice() {
   let i = Math.floor(Math.random() * optionsArray.length);
   computerSelection = optionsArray[i];
+  playRound();
+}
+
+function playRound(playerSelection, computerSelection) {
+  console.log(playerSelection);
+  console.log(computerSelection);
 }
 
 /* SUPPLIED CODE...
