@@ -1,0 +1,103 @@
+/* FONTS: CLIMATE CRISIS, GOLOS TEXT */
+@import url("https://fonts.googleapis.com/css2?family=Climate+Crisis&family=Golos+Text:wght@400;700&display=swap");
+
+html {
+  background: #f00;
+  width: 100vw;
+  height: 100vh;
+  padding: 0;
+  margin: 0;
+  font-size: 12px;
+}
+
+h1 {
+  margin: 0;
+  padding: 0;
+}
+
+#scorecard {
+  background-color: #fff;
+  font-family: "Golos Text", sans-serif;
+  margin: 10px;
+  padding: 16px 16px;
+  position: absolute;
+  text-align: center;
+  right: 0;
+}
+
+#scorecard h1,
+#scorecard h3 {
+  display: inline;
+  font-size: 2em;
+  font-weight: 400;
+  text-align: center;
+  margin: 0;
+  padding: 4px 16px;
+}
+
+#scorecard h1 {
+  font-size: 2.2em;
+  font-weight: 700;
+}
+
+.player-score,
+.computer-score {
+  background-color: #ccc;
+  display: flex;
+  justify-content: center;
+  justify-content: space-between;
+  align-items: stretch;
+}
+
+#container {
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  overflow: hidden;
+}
+
+.player-choice,
+.computer-choice {
+  color: #fff;
+  text-transform: uppercase;
+  font: oblique 20em "Climate Crisis", cursive;
+  text-align: left;
+  width: auto;
+}
+.computer-choice {
+  text-align: right;
+}
+
+.player-choice,
+.computer-choice {
+  position: relative;
+  /*  -webkit-animation: linear 1; */
+  -webkit-animation: linear infinite;
+  -webkit-animation-name: player-run;
+  -webkit-animation-duration: 1.5s;
+}
+@-webkit-keyframes player-run {
+  0% {
+    left: -100vw;
+  }
+  100% {
+    left: 100vw;
+  }
+}
+.player-choice {
+  top: 20%;
+}
+
+.computer-choice {
+  top: 10%;
+  -webkit-animation-name: comp-run;
+}
+@-webkit-keyframes comp-run {
+  0% {
+    left: 100%;
+  }
+  100% {
+    left: -100%;
+  }
+}
