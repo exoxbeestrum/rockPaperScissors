@@ -81,7 +81,6 @@ function choiceIntro() {
       compDiv.style.left = posCompChoice + "px";
     }
   }
-  console.log(window.innerWidth);
 }
 
 //PLAY THE ROUND
@@ -90,30 +89,37 @@ function playRound(playerSelection, computerSelection) {
   let computerIndex = optionsArray.indexOf(computerSelection);
 
   //CHECKS optionsArray[2] DOES NOT BEAT optionsArray[0]; PLAYER SCORES
-  if (playerIndex > computerIndex && computerIndex - playerIndex != 2) {
+  if (
+    playerIndex > computerIndex === true &&
+    computerIndex - playerIndex !== -2
+  ) {
     playerScore++;
   }
   //CHECK optionsArray[2] DOES NOT BEAT optionsArray[0]; COMPUTER SCORES
-  if (playerIndex < computerIndex && playerIndex - computerIndex != 2) {
+  else if (
+    playerIndex < computerIndex === true &&
+    computerIndex - playerIndex !== 2
+  ) {
     computerScore++;
   }
   //optionsArray[0] BEATS optionsArray[2]; PLAYER SCORES
-  if (computerIndex - playerIndex == 2) {
+  else if (computerIndex == 2 && playerIndex == 0) {
     playerScore++;
   }
   //optionsArray[0] BEATS optionsArray[2]; COMPUTER SCORES
-  if (playerIndex - computerIndex == 2) {
+  else if (playerIndex == 2 && computerIndex == 0) {
     computerScore++;
   }
   //CHECKS FOR TIES
-  if (playerIndex == computerIndex) {
+  else if (playerIndex == computerIndex) {
     console.log("tie");
   }
-  //UPDATE SCORE CARD
+
+  //UPDATE SCORECARD
   evalScore(playerScore, computerScore);
 
   //KEEP SCORE
-  function evalScore(playerScore, computerScore) {
+  function evalScore() {
     document.getElementById("player-score").innerHTML = playerScore;
     document.getElementById("comp-score").innerHTML = computerScore;
     //PLAYER WINS
@@ -142,5 +148,3 @@ document.getElementById("reset").addEventListener("click", () => {
   console.log("reset");
   location.reload();
 });
-
-console.log(window.innerWidth);
