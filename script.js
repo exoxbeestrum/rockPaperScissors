@@ -31,8 +31,8 @@ document.querySelectorAll(".button").forEach((button) => {
   button.addEventListener("click", () => {
     playerSelection = button.value;
     getComputerChoice(playerSelection);
-    document.getElementById("player-choice-heading").innerHTML =
-      "Your Choice: " + playerSelection;
+    document.getElementById("player-choice").innerHTML = playerSelection;
+    choiceIntro(playerSelection);
   });
 });
 
@@ -40,17 +40,55 @@ document.querySelectorAll(".button").forEach((button) => {
 function getComputerChoice(playerSelection) {
   let i = Math.floor(Math.random() * optionsArray.length);
   computerSelection = optionsArray[i];
-  document.getElementById("comp-choice-heading").innerHTML =
-    "Computer's Choice: " + computerSelection;
+  document.getElementById("comp-choice").innerHTML = computerSelection;
   playRound(playerSelection, computerSelection);
+}
+
+/* INTRO ANIMATIONS   */
+//SET PLAYER/COMPUTER CHOICE INITIAL POSITIONS
+document.getElementById("player-choice").style.left = "-100%";
+document.getElementById("comp-choice").style.left = "100%";
+
+function choiceIntro() {
+  const winWidth = window.innerWidth;
+  const playerDiv = document.getElementById("player-choice");
+  const playerWidth = document.getElementById("player-choice").offsetWidth;
+  const compDiv = document.getElementById("comp-choice");
+  const compWidth = document.getElementById("comp-choice").offsetWidth;
+
+  let midPlayer = winWidth / 2 - playerWidth / 2; //SCREEN CENTER: PLAYER CHOICE
+  let midComp = winWidth / 2 - compWidth / 2; //SCREEN CENTER: PLAYER CHOICE
+
+  let posPlayerChoice = 0 - playerWidth; //SET STARTING POSITION (PLAYER CHOICE)
+  let posCompChoice = winWidth; //SET STARTING POSITION (COMPUTER CHOICE)
+
+  playerTimer = setInterval(enterFramePlayer, 1); //SETS FUNCTION TIME
+  compTimer = setInterval(enterFrameComp, 1); //SETS FUNCTION TIME
+
+  function enterFramePlayer() {
+    if (posPlayerChoice >= midPlayer) {
+      clearInterval(playerTimer);
+    } else {
+      posPlayerChoice = posPlayerChoice + 10;
+      playerDiv.style.left = posPlayerChoice + "px";
+    }
+  }
+  function enterFrameComp() {
+    if (posCompChoice <= midComp) {
+      clearInterval(compTimer);
+    } else {
+      posCompChoice = posCompChoice - 10;
+      compDiv.style.left = posCompChoice + "px";
+    }
+  }
+  console.log(window.innerWidth);
 }
 
 //PLAY THE ROUND
 function playRound(playerSelection, computerSelection) {
   let playerIndex = optionsArray.indexOf(playerSelection);
   let computerIndex = optionsArray.indexOf(computerSelection);
-  console.log("playr " + playerSelection);
-  console.log("comp " + computerSelection);
+
   //CHECKS optionsArray[2] DOES NOT BEAT optionsArray[0]; PLAYER SCORES
   if (playerIndex > computerIndex && computerIndex - playerIndex != 2) {
     playerScore++;
@@ -104,3 +142,5 @@ document.getElementById("reset").addEventListener("click", () => {
   console.log("reset");
   location.reload();
 });
+
+console.log(window.innerWidth);

@@ -23,6 +23,7 @@ h1 {
   position: absolute;
   text-align: center;
   right: 0;
+  z-index: 999;
 }
 
 #scorecard h1,
@@ -52,28 +53,46 @@ h1 {
 #container {
   width: 100vw;
   height: 100vh;
+  position: relative;
+  overflow: hidden;
+}
+#player-choice,
+#comp-choice {
+  position: absolute;
+  left: 0;
+  font: oblique 15em "Climate Crisis", cursive;
+  text-transform: uppercase;
+  color: #fff;
+}
+#comp-choice {
+  top: 200px;
+}
+
+/*
+#container {
+  width: 100vw;
+  height: 100vh;
   top: 0;
   left: 0;
   overflow: hidden;
 }
 
 .player-choice,
-.computer-choice {
+.comp-choice {
   color: #fff;
   text-transform: uppercase;
   font: oblique 20em "Climate Crisis", cursive;
   text-align: left;
   width: auto;
 }
-.computer-choice {
+.comp-choice {
   text-align: right;
 }
 
 .player-choice,
-.computer-choice {
+.comp-choice {
   position: relative;
-  /*  -webkit-animation: linear 1; */
-  -webkit-animation: linear infinite;
+  -webkit-animation: linear 1;
   -webkit-animation-name: player-run;
   -webkit-animation-duration: 1.5s;
 }
@@ -89,7 +108,7 @@ h1 {
   top: 20%;
 }
 
-.computer-choice {
+.comp-choice {
   top: 10%;
   -webkit-animation-name: comp-run;
 }
@@ -101,3 +120,4 @@ h1 {
     left: -100%;
   }
 }
+*/
