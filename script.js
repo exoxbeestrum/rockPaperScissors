@@ -259,7 +259,7 @@ function switcheroo() {
   }
 }
 
-//DRAGGABLE SCORECARD
+//DRAGGABLE SCORECARD FUNCTION
 //VIA https://www.w3schools.com/howto/howto_js_draggable.asp
 let elem = document.getElementById("container");
 
@@ -306,4 +306,19 @@ function dragElement(elem) {
     document.onmousemove = null;
   }
 }
+//DRAG THE SCORECARD
 dragElement(elem);
+
+//SCROLLING TITLE BAR
+//via: MarqueeTitle v4.0 | MIT License | git.io/vQZbs
+(function (c, a, m) {
+  var title = (c || document.title) + " " + (a || " ") + " ";
+  setInterval(function () {
+    title = title.substring(1) + title.charAt(0);
+    document.title = title;
+  }, m || 300);
+})(
+  /* Tab Text */ "🪨  🧻 ✂️ 🪨 🧻 ✂️ 🪨  🧻 ✂️ 🪨 🧻 ✂️ ",
+  /* Title Repeat Separator */ "",
+  /* Scroll Speed (in milleseconds) */ 500
+);
