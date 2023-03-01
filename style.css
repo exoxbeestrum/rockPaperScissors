@@ -1,13 +1,13 @@
-/* FONTS: CLIMATE CRISIS, GOLOS TEXT */
-@import url("https://fonts.googleapis.com/css2?family=Climate+Crisis&family=Golos+Text:wght@400;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Climate+Crisis&family=Fira+Sans+Extra+Condensed:wght@200;500&display=swap");
 
-html {
+html,
+body {
   background: #f00;
   width: 100vw;
   height: 100vh;
   padding: 0;
   margin: 0;
-  font-size: 12px;
+  font-size: 10px;
 }
 
 h1 {
@@ -15,47 +15,132 @@ h1 {
   padding: 0;
 }
 
-/* SCORECARD ***/
-#scorecard {
-  background-color: #fff;
-  font-family: "Golos Text", sans-serif;
-  margin: 10px;
-  padding: 16px 16px;
-  position: absolute;
-  text-align: center;
-  right: 0;
-  z-index: 999;
+button {
+  border: none;
 }
 
-#scorecard h1,
-#scorecard h3 {
-  display: inline;
-  font-size: 2em;
-  font-weight: 400;
+/* SCORECARD ET AL. ***/
+#container {
+  position: absolute;
   text-align: center;
+  top: 2%;
+  left: 2%;
+}
+
+#draggable {
+  background: #fff;
+  background-image: url("https://img.icons8.com/sf-ultralight/25/null/resize-four-directions.png");
+  filter: drop-shadow(3px 3px #000);
+  background-repeat: no-repeat;
+  background-position: 5px 3px;
+  height: 33px;
+  position: relative;
+  text-align: left;
+  z-index: 888;
+}
+#draggable:hover {
+  cursor: grab;
+}
+#draggable:active {
+  cursor: grabbing;
+}
+
+#scorecard-options-container {
+  position: relative;
+}
+
+.scorecard {
+  background-color: #fff;
+  filter: drop-shadow(3px 3px #000);
+  font-family: "Fira Sans Extra Condensed", sans-serif;
+  font-weight: 200;
+  padding: 22px 16px 36px;
+  position: relative;
+  z-index: 999;
+}
+.scorecard h1,
+.scorecard h3 {
+  display: inline;
+  font-family: "Fira Sans Extra Condensed", sans-serif;
+  font-size: 2.2em;
+  font-weight: 500;
+  text-align: center;
+  font-style: italic;
   margin: 0;
   padding: 4px 16px;
 }
-
-#scorecard h1 {
-  font-size: 2.2em;
-  font-weight: 700;
+.scorecard > h1 {
+  font-size: 3em;
+  font-weight: 800;
+  font-style: oblique;
 }
 
 .player-score,
 .comp-score {
+  align-items: stretch;
   background: #fff000;
   display: flex;
+  filter: drop-shadow(2px 2px #5b5b5b);
   justify-content: center;
   justify-content: space-between;
-  align-items: stretch;
+  margin-top: 8px;
 }
 .comp-score {
-    background: #d7cece;
+  background: #d7cece;
 }
-/* END SCORECARD ***/
 
-#container {
+/* PLAY, RESET, OPTIONS   */
+#play-reset-container,
+#options {
+  background: #999;
+  filter: drop-shadow(3px 3px #000);
+  margin: 0 6px;
+  padding: 10px 10px 6px;
+  position: relative;
+  top: 0;
+  z-index: 500;
+}
+.play-reset-container {
+  position: relative;
+  top: 0;
+}
+
+button#play,
+button#reset,
+#options > button {
+  background: #fff;
+  display: block;
+  filter: drop-shadow(2px 2px #5b5b5b);
+  font-family: "Fira Sans Extra Condensed", sans-serif;
+  font-size: 1.8em;
+  font-weight: 200;
+  margin: 4px 0;
+  padding: 2px 0;
+  position: relative;
+  text-transform: capitalize;
+  width: 100%;
+}
+button#play,
+button#reset {
+  margin: 0 0 6px;
+  padding: 0 0 2px;
+  position: relative;
+  top: 0;
+}
+button#play {
+  margin-bottom: 10px;
+}
+
+/* SET-UP FOR SCROLLING FUNCTIONS   */
+#scorecard-options-container {
+  top: -36px;
+}
+#options {
+  top: -110px;
+}
+/* END SCORECARD ET AL. ***/
+
+#choice-container {
   width: 100vw;
   height: 100vh;
   position: relative;
@@ -63,67 +148,13 @@ h1 {
 }
 #player-choice,
 #comp-choice {
-    color: #fff000;
+  color: #fff000;
   position: absolute;
   left: 0;
   font: oblique 15em "Climate Crisis", cursive;
   text-transform: uppercase;
 }
 #comp-choice {
-    color: #d7cece;
+  color: #d7cece;
   top: 200px;
 }
-
-/*
-#container {
-  width: 100vw;
-  height: 100vh;
-  top: 0;
-  left: 0;
-  overflow: hidden;
-}
-
-.player-choice,
-.comp-choice {
-  color: #fff;
-  text-transform: uppercase;
-  font: oblique 20em "Climate Crisis", cursive;
-  text-align: left;
-  width: auto;
-}
-.comp-choice {
-  text-align: right;
-}
-
-.player-choice,
-.comp-choice {
-  position: relative;
-  -webkit-animation: linear 1;
-  -webkit-animation-name: player-run;
-  -webkit-animation-duration: 1.5s;
-}
-@-webkit-keyframes player-run {
-  0% {
-    left: -100vw;
-  }
-  100% {
-    left: 100vw;
-  }
-}
-.player-choice {
-  top: 20%;
-}
-
-.comp-choice {
-  top: 10%;
-  -webkit-animation-name: comp-run;
-}
-@-webkit-keyframes comp-run {
-  0% {
-    left: 100%;
-  }
-  100% {
-    left: -100%;
-  }
-}
-*/
