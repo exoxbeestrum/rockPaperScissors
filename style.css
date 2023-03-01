@@ -15,6 +15,7 @@ h1 {
   padding: 0;
 }
 
+/* SCORECARD ***/
 #scorecard {
   background-color: #fff;
   font-family: "Golos Text", sans-serif;
@@ -42,13 +43,17 @@ h1 {
 }
 
 .player-score,
-.computer-score {
-  background-color: #ccc;
+.comp-score {
+  background: #fff000;
   display: flex;
   justify-content: center;
   justify-content: space-between;
   align-items: stretch;
 }
+.comp-score {
+    background: #d7cece;
+}
+/* END SCORECARD ***/
 
 #container {
   width: 100vw;
@@ -58,13 +63,14 @@ h1 {
 }
 #player-choice,
 #comp-choice {
+    color: #fff000;
   position: absolute;
   left: 0;
   font: oblique 15em "Climate Crisis", cursive;
   text-transform: uppercase;
-  color: #fff;
 }
 #comp-choice {
+    color: #d7cece;
   top: 200px;
 }
 
