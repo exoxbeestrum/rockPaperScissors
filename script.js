@@ -139,6 +139,9 @@ function playRound(playerSelection, computerSelection) {
         document.getElementById("reset").innerHTML = "Play Again?";
         document.getElementById("reset").style.visibility = "visible";
       }
+      optionScrollUp();
+      scoreCardDown();
+      switcheroo();
     }
   }
 }
@@ -146,5 +149,161 @@ function playRound(playerSelection, computerSelection) {
 //RESET GAME
 document.getElementById("reset").addEventListener("click", () => {
   console.log("reset");
-  location.reload();
+  //  location.reload();
+  playerScore = 0;
+  computerScore = 0;
+  playRound();
+  console.log(playerScore + ", " + computerScore);
+  optionScrollDown();
+  scoreCardUp();
 });
+
+/* SCORECARD SCROLL OUTS/INS */
+document.getElementById("play").addEventListener("click", () => {
+  scoreCardUp();
+  optionScrollDown();
+});
+
+//SCORECARD SCROLL UP
+function scoreCardUp() {
+  //GENERIC SCROLL MOVEMENTS
+  let id = null;
+  //1) UPDATE W/ ID
+  let div = document.getElementById("scorecard-options-container");
+  //2) SET STARTING POSITION
+  let position = -36;
+  clearInterval(id);
+  //3) ADJUST TIME (IF NEEDED)
+  id = setInterval(scroll);
+  function scroll() {
+    //4) SET ENDING POSITION
+    if (position <= -79) {
+      clearInterval(id);
+    } else {
+      position--;
+      div.style.top = position + "px";
+    }
+  }
+}
+
+//SCORECARD SCROLL DOWN
+function scoreCardDown() {
+  //GENERIC SCROLL MOVEMENTS
+  let id = null;
+  //1) UPDATE W/ ID
+  let div = document.getElementById("scorecard-options-container");
+  //2) SET STARTING POSITION
+  let position = -79;
+  clearInterval(id);
+  //3) ADJUST TIME (IF NEEDED)
+  id = setInterval(scroll);
+  function scroll() {
+    //4) SET ENDING POSITION
+    if (position >= -36) {
+      clearInterval(id);
+    } else {
+      position++;
+      div.style.top = position + "px";
+    }
+  }
+}
+
+//OPTIONS SCROLL DOWN
+function optionScrollDown() {
+  let div = document.getElementById("options");
+  //GENERIC SCROLL MOVEMENTS
+  let id = null;
+  //2) SET STARTING POSITION
+  let position = -110;
+  clearInterval(id);
+  //3) ADJUST TIME (IF NEEDED)
+  id = setInterval(scroll);
+  function scroll() {
+    //4) SET ENDING POSITION
+    if (position >= -2) {
+      clearInterval(id);
+    } else {
+      position = position + 4;
+      div.style.top = position + "px";
+    }
+  }
+}
+
+//OPTIONS SCROLL UP
+function optionScrollUp() {
+  let div = document.getElementById("options");
+  //GENERIC SCROLL MOVEMENTS
+  let id = null;
+  //2) SET STARTING POSITION
+  let position = -2;
+  clearInterval(id);
+  //3) ADJUST TIME (IF NEEDED)
+  id = setInterval(scroll);
+  function scroll() {
+    //4) SET ENDING POSITION
+    if (position <= -110) {
+      clearInterval(id);
+    } else {
+      position = position - 4;
+      div.style.top = position + "px";
+    }
+  }
+}
+
+//PLAY AGAIN BUTTON REVEAL
+function switcheroo() {
+  document.getElementById("play-reset-container").style.top = "-33px";
+  document.getElementById("play").style.visibility = "hidden";
+  for (let i = 0; i < optionsArray.length; i++) {
+    document.getElementsByClassName("button")[i].disabled = false;
+  }
+}
+
+//DRAGGABLE SCORECARD
+//VIA https://www.w3schools.com/howto/howto_js_draggable.asp
+let elem = document.getElementById("container");
+
+function dragElement(elem) {
+  let pos1 = 0,
+    pos2 = 0,
+    pos3 = 0,
+    pos4 = 0;
+  if (document.getElementById("draggable")) {
+    //DECLARE THE DRAGGABLE HANDLE
+    document.getElementById("draggable").onmousedown = dragMouseDown;
+  } else {
+    //OTHERWISE, THE WHOLE THING IS GRABBABLE
+    elem.onmousedown = dragMouseDown;
+  }
+
+  function dragMouseDown(e) {
+    e = e || window.event;
+    e.preventDefault();
+    //GET MOUSE POSITION AT STARTUP
+    pos3 = e.clientX;
+    pos4 = e.clientY;
+    document.onmouseup = closeDragElement;
+    //CALL FUNCTION WHEN MOUSE MOVES
+    document.onmousemove = elementDrag;
+  }
+
+  function elementDrag(e) {
+    e = e || window.event;
+    e.preventDefault();
+    //CALCULATE NEW CURSOR POSITION
+    pos1 = pos3 - e.clientX;
+    pos2 = pos4 - e.clientY;
+    pos3 = e.clientX;
+    pos4 = e.clientY;
+    //SET ELEM NEW POSITION
+    elem.style.top = elem.offsetTop - pos2 + "px";
+    elem.style.left = elem.offsetLeft - pos1 + "px";
+  }
+
+  function closeDragElement() {
+    //STOP MOVING ON MOUSE RELEASE
+    document.onmouseup = null;
+    document.onmousemove = null;
+  }
+}
+dragElement(elem);
