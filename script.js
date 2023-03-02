@@ -1,3 +1,36 @@
+// Updated: 3/1/2023
+
+/* ---------------------------------------------------*/
+/* TABLE OF CONTENTS                                  */
+/* ---------------------------------------------------*/
+/* SET VARIABLES                                      */
+/* HIDE RESET BUTTON                                  */
+/* POPULATE BUTTONS W/ CLASS NAME                     */
+/* SET THE SCORE                                      */
+/* PLAYER/BUTTON LISTENER                             */
+/* GET COMPUTER CHOICE                                */
+/* INTRO ANIMATIONS                                   */
+/* --- SET PLAYER/COMPUTER CHOICE INITIAL POSITIONS   */
+/* PLAY THE ROUND                                     */
+/* UPDATE SCORECARD                                   */
+/* KEEP SCORE                                         */
+/* ROUND CONCLUSION/ANIMATION DELAY                   */
+/* --- ENABLE BUTTONS                                 */
+/* --- DISABLE BUTTONS                                */
+/* --- ORDER OF ANIMATIONs (SET TIMEOUT)              */
+/* CSS RESET                                          */
+/* RESET GAME                                         */
+/* SCORECARD SCROLL OUTS/INS                          */
+/* SCORECARD SCROLL-UP                                */
+/* SCORECARD SCROLL-DOWN                              */
+/* OPTIONS SCROLL-DOWN                                */
+/* OPTIONS SCROLL-UP                                  */
+/* PLAY AGAIN BUTTON REVEAL                           */
+/* DRAGGABLE SCORECARD FUNCTION                       */
+/* DRAG THE SCORECARD                                 */
+/* SCROLLING TITLE BAR                                */
+/* ---------------------------------------------------*/
+
 //SET VARIABLES
 const optionsArray = ["rock", "paper", "scissors"]; //SET VARIABLES
 const buttonCount = document.getElementsByClassName("button"); //GET # OF BUTTONS
@@ -6,6 +39,7 @@ let playerSelection = null;
 let computerSelection = null;
 let playerScore = 0;
 let computerScore = 0;
+let tieScore = 0;
 
 //HIDE RESET BUTTON
 document.getElementById("reset").style.visibility = "hidden";
@@ -34,6 +68,16 @@ document.querySelectorAll(".button").forEach((button) => {
     document.getElementById("player-choice").innerHTML = playerSelection;
     choiceIntro(playerSelection);
   });
+  /*
+  button.addEventListener("mouseover", () => {
+    button.style.backgroundColor = "#51b266";
+    button.style.color = "#fff";
+  });
+  button.addEventListener("mouseout", () => {
+    button.style.backgroundColor = "#fff";
+    button.style.color = "#000";
+  });
+  */
 });
 
 //GET COMPUTER CHOICE
@@ -44,7 +88,7 @@ function getComputerChoice(playerSelection) {
   playRound(playerSelection, computerSelection);
 }
 
-/* INTRO ANIMATIONS   */
+//INTRO ANIMATIONS
 //SET PLAYER/COMPUTER CHOICE INITIAL POSITIONS
 document.getElementById("player-choice").style.left = "-100%";
 document.getElementById("comp-choice").style.left = "100%";
@@ -94,8 +138,9 @@ function playRound(playerSelection, computerSelection) {
     computerIndex - playerIndex !== -2
   ) {
     playerScore++;
-    document.getElementById("win").innerHTML = "WIN!";
-    console.log('win');
+    endRound();
+    //    document.getElementById("win").innerHTML = "WIN!";
+    //    console.log("win");
   }
   //CHECK optionsArray[2] DOES NOT BEAT optionsArray[0]; COMPUTER SCORES
   else if (
@@ -103,18 +148,22 @@ function playRound(playerSelection, computerSelection) {
     computerIndex - playerIndex !== 2
   ) {
     computerScore++;
+    endRound();
   }
   //optionsArray[0] BEATS optionsArray[2]; PLAYER SCORES
   else if (computerIndex == 2 && playerIndex == 0) {
     playerScore++;
+    endRound();
   }
   //optionsArray[0] BEATS optionsArray[2]; COMPUTER SCORES
   else if (playerIndex == 2 && computerIndex == 0) {
     computerScore++;
+    endRound();
   }
   //CHECKS FOR TIES
   else if (playerIndex == computerIndex) {
-    console.log("tie");
+    tieScore++;
+    endRound();
   }
 
   //UPDATE SCORECARD
@@ -148,14 +197,64 @@ function playRound(playerSelection, computerSelection) {
   }
 }
 
+//ROUND CONCLUSION/ANIMATION DELAY
+function endRound() {
+  //ENABLE BUTTONS
+  function buttonEnable() {
+    let buttonCount = document.getElementsByTagName("button");
+    for (i = 0; i < buttonCount.length; i++) {
+      buttonCount[i].disabled = false;
+      buttonCount[i].style.backgroundColor = "#fff";
+      buttonCount[i].style.boxShadow = "2px 2px 0 #5b5b5b";
+      buttonCount[i].style.color = "#000";
+      buttonCount[i].style.textDecoration = "none";
+      buttonCount[i].style.cursor = "default";
+    }
+  }
+  //DISABLE BUTTONS
+  function buttonDisable() {
+    let buttonCount = document.getElementsByTagName("button");
+    for (i = 0; i < buttonCount.length; i++) {
+      buttonCount[i].disabled = true;
+      buttonCount[i].style.boxShadow = "2px 2px #999";
+      buttonCount[i].style.backgroundColor = "#d7cece";
+      buttonCount[i].style.color = "#fff";
+      buttonCount[i].style.cursor = "progress";
+    }
+  }
+  //ORDER OF ANIMATIONs (SET TIMEOUT)
+  setTimeout(() => {
+    document.body.style.cursor = "progress";
+    buttonDisable();
+  }, 0);
+  setTimeout(() => {
+    //ADD ADDITIONAL FUNCTIONS HERE (IF NEEDED)
+  }, 750);
+  setTimeout(() => {
+    document.body.style.cursor = "default";
+    buttonEnable();
+    cssReset();
+  }, 1500);
+}
+
+function cssReset() {
+  document.querySelectorAll(".button").forEach((button) => {
+    button.addEventListener("mouseover", () => {
+      button.style.backgroundColor = "#51b266";
+      button.style.color = "#fff";
+    });
+    button.addEventListener("mouseout", () => {
+      button.style.backgroundColor = "#fff";
+      button.style.color = "#000";
+    });
+  });
+}
+
 //RESET GAME
 document.getElementById("reset").addEventListener("click", () => {
-  console.log("reset");
-  //  location.reload();
   playerScore = 0;
   computerScore = 0;
   playRound();
-  console.log(playerScore + ", " + computerScore);
   optionScrollDown();
   scoreCardUp();
 });
@@ -166,7 +265,7 @@ document.getElementById("play").addEventListener("click", () => {
   optionScrollDown();
 });
 
-//SCORECARD SCROLL UP
+//SCORECARD SCROLL-UP
 function scoreCardUp() {
   //GENERIC SCROLL MOVEMENTS
   let id = null;
@@ -188,7 +287,7 @@ function scoreCardUp() {
   }
 }
 
-//SCORECARD SCROLL DOWN
+//SCORECARD SCROLL-DOWN
 function scoreCardDown() {
   //GENERIC SCROLL MOVEMENTS
   let id = null;
@@ -210,7 +309,7 @@ function scoreCardDown() {
   }
 }
 
-//OPTIONS SCROLL DOWN
+//OPTIONS SCROLL-DOWN
 function optionScrollDown() {
   let div = document.getElementById("options");
   //GENERIC SCROLL MOVEMENTS
@@ -231,7 +330,7 @@ function optionScrollDown() {
   }
 }
 
-//OPTIONS SCROLL UP
+//OPTIONS SCROLL-UP
 function optionScrollUp() {
   let div = document.getElementById("options");
   //GENERIC SCROLL MOVEMENTS
@@ -322,5 +421,5 @@ dragElement(elem);
 })(
   "🪨  🧻 ✂️ 🪨 🧻 ✂️ 🪨  🧻 ✂️ 🪨 🧻 ✂️ ", //TAB TEXT
   "", //TITLE REPEAT SEPARATOR
-  500 //SCROLL SPEED (MS)
+  300 //SCROLL SPEED (MS)
 );
