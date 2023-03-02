@@ -1,13 +1,8 @@
 /* GOOGLE FONTS   */
 @import url("https://fonts.googleapis.com/css2?family=Climate+Crisis&family=Fira+Sans+Extra+Condensed:wght@200;500&family=Press+Start+2P&display=swap");
-/* GOOGLE FONTS   */
-@import url("https://fonts.googleapis.com/css2?family=Climate+Crisis&family=Fira+Sans+Extra+Condensed:wght@200;500&family=Press+Start+2P&display=swap");
 
 html,
 body {
-  background: #fda2be;
-  background-image: url("imgs/bg_checker_pattern.png");
-  background-repeat: repeat;
   background: #fda2be;
   background-image: url("imgs/bg_checker_pattern.png");
   background-repeat: repeat;
@@ -35,11 +30,9 @@ button {
   top: 2%;
   left: 2%;
   z-index: 500;
-  z-index: 500;
 }
 
 #draggable {
-  background: #ff5743;
   background: #ff5743;
   background-image: url("https://img.icons8.com/sf-ultralight/25/null/resize-four-directions.png");
   box-shadow: 3px 3px #000;
@@ -90,7 +83,6 @@ button {
 .player-score,
 .comp-score {
   align-items: stretch;
-  background: #51b266;
   background: #51b266;
   display: flex;
   box-shadow: 2px 2px #5b5b5b;
