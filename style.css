@@ -181,9 +181,9 @@ button#play {
 }
 
 #win {
-  color: #b14337;
-  filter: drop-shadow(3px 3px 0 #5b5b5b);
-  font: normal 22em "Press Start 2P", cursive;
+  color: #f00;
+  filter: drop-shadow(6px 6px 0 #fc0);
+  font: normal 22em "Press Start 2P", monospace;
   position: absolute;
   z-index: 400;
   top: 8%;
