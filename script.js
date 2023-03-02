@@ -68,16 +68,6 @@ document.querySelectorAll(".button").forEach((button) => {
     document.getElementById("player-choice").innerHTML = playerSelection;
     choiceIntro(playerSelection);
   });
-  /*
-  button.addEventListener("mouseover", () => {
-    button.style.backgroundColor = "#51b266";
-    button.style.color = "#fff";
-  });
-  button.addEventListener("mouseout", () => {
-    button.style.backgroundColor = "#fff";
-    button.style.color = "#000";
-  });
-  */
 });
 
 //GET COMPUTER CHOICE

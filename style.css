@@ -24,6 +24,7 @@ button {
 
 /* SCORECARD ET AL. ***/
 #container {
+  min-width: 194px;;
   position: absolute;
   text-align: center;
   top: 2%;
@@ -34,7 +35,7 @@ button {
 #draggable {
   background: #ff5743;
   background-image: url("https://img.icons8.com/sf-ultralight/25/null/resize-four-directions.png");
-  filter: drop-shadow(3px 3px #000);
+  box-shadow: 3px 3px #000;
   background-repeat: no-repeat;
   background-position: 5px 3px;
   height: 33px;
@@ -55,7 +56,7 @@ button {
 
 .scorecard {
   background-color: #fff;
-  filter: drop-shadow(3px 3px #000);
+  box-shadow: 3px 3px #000;
   font-family: "Fira Sans Extra Condensed", sans-serif;
   font-weight: 200;
   padding: 22px 16px 36px;
@@ -84,7 +85,7 @@ button {
   align-items: stretch;
   background: #51b266;
   display: flex;
-  filter: drop-shadow(2px 2px #5b5b5b);
+  box-shadow: 2px 2px #5b5b5b;
   justify-content: center;
   justify-content: space-between;
   margin-top: 8px;
@@ -97,7 +98,7 @@ button {
 #play-reset-container,
 #options {
   background: #999;
-  filter: drop-shadow(3px 3px #000);
+  box-shadow: 3px 3px #000;
   margin: 0 6px;
   padding: 10px 10px 6px;
   position: relative;
@@ -114,7 +115,7 @@ button#reset,
 #options > button {
   background: #fff;
   display: block;
-  filter: drop-shadow(2px 2px #5b5b5b);
+  box-shadow: 2px 2px #5b5b5b;
   font-family: "Fira Sans Extra Condensed", sans-serif;
   font-size: 1.8em;
   font-weight: 200;
@@ -135,8 +136,7 @@ button#reset:hover,
 button#play:active,
 button#reset:active,
 #options > button:active {
-  filter: drop-shadow(0 0 #5b5b5b);
-  border: none;
+  box-shadow: 0 0 #5b5b5b;
   color: #51b266;
 }
 
