@@ -132,6 +132,7 @@ function playRound(playerSelection, computerSelection) {
     //    document.getElementById("win").innerHTML = "WIN!";
     //    console.log("win");
   }
+
   //CHECK optionsArray[2] DOES NOT BEAT optionsArray[0]; COMPUTER SCORES
   else if (
     playerIndex < computerIndex === true &&
@@ -409,7 +410,7 @@ dragElement(elem);
     document.title = title;
   }, m || 300);
 })(
-  "🪨  🧻 ✂️ 🪨 🧻 ✂️ 🪨  🧻 ✂️ 🪨 🧻 ✂️ ", //TAB TEXT
-  "", //TITLE REPEAT SEPARATOR
-  300 //SCROLL SPEED (MS)
+  /* Tab Text */ "🪨  🧻 ✂️ 🪨 🧻 ✂️ 🪨  🧻 ✂️ 🪨 🧻 ✂️ ",
+  /* Title Repeat Separator */ "",
+  /* Scroll Speed (in milleseconds) */ 500
 );
