@@ -17,7 +17,7 @@
 /* ROUND CONCLUSION/ANIMATION DELAY                   */
 /* --- ENABLE BUTTONS                                 */
 /* --- DISABLE BUTTONS                                */
-/* --- ORDER OF ANIMATIONs (SET TIMEOUT)              */
+/* --- MATCH ANIMATIONs (SET TIMEOUT)                 */
 /* CSS RESET                                          */
 /* RESET GAME                                         */
 /* SCORECARD SCROLL OUTS/INS                          */
@@ -157,6 +157,7 @@ function playRound(playerSelection, computerSelection) {
   else if (playerIndex == computerIndex) {
     tieScore++;
     win = "tie";
+    console.log("HERE?");
     endRound();
   }
 
@@ -169,12 +170,12 @@ function playRound(playerSelection, computerSelection) {
     document.getElementById("comp-score").innerHTML = computerScore;
     //PLAYER WINS
     if (playerScore == 5) {
-      document.getElementById("win").innerHTML = "YOU WIN!!!";
+      document.getElementById("win").innerHTML = "YOU WIN!";
       endGame();
     }
     //PLAYER LOSES
     if (computerScore == 5) {
-      document.getElementById("win").innerHTML = "YOU LOSE!!!";
+      document.getElementById("win").innerHTML = "YOU LOSE!";
       endGame();
     }
     //DISABLE BUTTONS
@@ -196,23 +197,23 @@ function endRound() {
   //WIN-LOSE-TIE MESSAGE
   function roundResult() {
     let result = win;
-    if (result == "win") {
+    if (result == "win" && playerScore !== 5) {
       document.getElementById("win").innerHTML = "WIN!";
       document.getElementById("win").style.zIndex = 1000;
-      console.log("win");
+      console.log(playerScore);
     }
-    if (result == "lose") {
+    if (result == "lose" && computerScore !== 5) {
       document.getElementById("win").innerHTML = "LOSE!";
       document.getElementById("win").style.zIndex = 1000;
-      console.log("lsoe");
+      console.log(computerScore);
     }
     if (result == "tie") {
       document.getElementById("win").innerHTML = "TIE!";
       document.getElementById("win").style.zIndex = 1000;
-      console.log("tie");
+      console.log(computerScore);
+//      console.log("tie");
     }
   }
-  roundResult();
 
   //ENABLE BUTTONS
   function buttonEnable() {
@@ -237,43 +238,44 @@ function endRound() {
       buttonCount[i].style.cursor = "progress";
     }
   }
-  //ORDER OF ANIMATIONs (SET TIMEOUT)
+  //MATCH ANIMATION (SET TIMEOUT)
   setTimeout(() => {
     document.body.style.cursor = "progress";
     buttonDisable();
   }, 0);
 
   setTimeout(() => {
-    //ADD ADDITIONAL FUNCTIONS HERE (IF NEEDED)
-    document.getElementById("win").innerHTML = "";
-    document.getElementById("win").style.zIndex = 0;
-  }, 500);
-
-  setTimeout(() => {
     roundResult();
   }, 750);
 
   setTimeout(() => {
-    //ADD ADDITIONAL FUNCTIONS HERE (IF NEEDED)
     document.getElementById("win").innerHTML = "";
     document.getElementById("win").style.zIndex = 0;
-  }, 1000);
-
-  setTimeout(() => {
-    roundResult();
   }, 1250);
 
   setTimeout(() => {
-    //ADD ADDITIONAL FUNCTIONS HERE (IF NEEDED)
+    roundResult();
+  }, 1750);
+
+  setTimeout(() => {
     document.getElementById("win").innerHTML = "";
     document.getElementById("win").style.zIndex = 0;
-  }, 1500);
+  }, 2250);
+
+  setTimeout(() => {
+    roundResult();
+  }, 2750);
+
+  setTimeout(() => {
+    document.getElementById("win").innerHTML = "";
+    document.getElementById("win").style.zIndex = 0;
+  }, 3250);
 
   setTimeout(() => {
     document.body.style.cursor = "default";
     buttonEnable();
     cssReset();
-  }, 1750);
+  }, 3500);
 }
 
 function cssReset() {
