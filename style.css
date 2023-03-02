@@ -1,8 +1,11 @@
-@import url("https://fonts.googleapis.com/css2?family=Climate+Crisis&family=Fira+Sans+Extra+Condensed:wght@200;500&display=swap");
+/* GOOGLE FONTS   */
+@import url("https://fonts.googleapis.com/css2?family=Climate+Crisis&family=Fira+Sans+Extra+Condensed:wght@200;500&family=Press+Start+2P&display=swap");
 
 html,
 body {
-  background: #f00;
+  background: #fda2be;
+  background-image: url("imgs/bg_checker_pattern.png");
+  background-repeat: repeat;
   width: 100vw;
   height: 100vh;
   padding: 0;
@@ -25,10 +28,11 @@ button {
   text-align: center;
   top: 2%;
   left: 2%;
+  z-index: 500;
 }
 
 #draggable {
-  background: #fff;
+  background: #ff5743;
   background-image: url("https://img.icons8.com/sf-ultralight/25/null/resize-four-directions.png");
   filter: drop-shadow(3px 3px #000);
   background-repeat: no-repeat;
@@ -78,7 +82,7 @@ button {
 .player-score,
 .comp-score {
   align-items: stretch;
-  background: #fff000;
+  background: #51b266;
   display: flex;
   filter: drop-shadow(2px 2px #5b5b5b);
   justify-content: center;
@@ -120,6 +124,22 @@ button#reset,
   text-transform: capitalize;
   width: 100%;
 }
+
+button#play:hover,
+button#reset:hover,
+#options > button:hover {
+  background: #51b266;
+  color: #fff;
+}
+
+button#play:active,
+button#reset:active,
+#options > button:active {
+  filter: drop-shadow(0 0 #5b5b5b);
+  border: none;
+  color: #51b266;
+}
+
 button#play,
 button#reset {
   margin: 0 0 6px;
@@ -148,7 +168,8 @@ button#play {
 }
 #player-choice,
 #comp-choice {
-  color: #fff000;
+  color: #51b266;
+  filter: drop-shadow(2px 2px #5b5b5b);
   position: absolute;
   left: 0;
   font: oblique 15em "Climate Crisis", cursive;
@@ -157,4 +178,16 @@ button#play {
 #comp-choice {
   color: #d7cece;
   top: 200px;
+}
+
+#win {
+  color: #b14337;
+  filter: drop-shadow(3px 3px 0 #5b5b5b);
+  font: normal 22em "Press Start 2P", cursive;
+  position: absolute;
+  z-index: 400;
+  top: 8%;
+  left: 0;
+  width: 100vw;
+  text-align: center;
 }

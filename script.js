@@ -94,6 +94,8 @@ function playRound(playerSelection, computerSelection) {
     computerIndex - playerIndex !== -2
   ) {
     playerScore++;
+    document.getElementById("win").innerHTML = "WIN!";
+    console.log('win');
   }
   //CHECK optionsArray[2] DOES NOT BEAT optionsArray[0]; COMPUTER SCORES
   else if (
@@ -141,7 +143,7 @@ function playRound(playerSelection, computerSelection) {
       }
       optionScrollUp();
       scoreCardDown();
-      switcheroo();
+      playAgain();
     }
   }
 }
@@ -251,7 +253,7 @@ function optionScrollUp() {
 }
 
 //PLAY AGAIN BUTTON REVEAL
-function switcheroo() {
+function playAgain() {
   document.getElementById("play-reset-container").style.top = "-33px";
   document.getElementById("play").style.visibility = "hidden";
   for (let i = 0; i < optionsArray.length; i++) {
@@ -318,7 +320,7 @@ dragElement(elem);
     document.title = title;
   }, m || 300);
 })(
-  /* Tab Text */ "🪨  🧻 ✂️ 🪨 🧻 ✂️ 🪨  🧻 ✂️ 🪨 🧻 ✂️ ",
-  /* Title Repeat Separator */ "",
-  /* Scroll Speed (in milleseconds) */ 500
+  "🪨  🧻 ✂️ 🪨 🧻 ✂️ 🪨  🧻 ✂️ 🪨 🧻 ✂️ ", //TAB TEXT
+  "", //TITLE REPEAT SEPARATOR
+  500 //SCROLL SPEED (MS)
 );
