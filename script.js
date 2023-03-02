@@ -40,6 +40,7 @@ let computerSelection = null;
 let playerScore = 0;
 let computerScore = 0;
 let tieScore = 0;
+let win = undefined;
 
 //HIDE RESET BUTTON
 document.getElementById("reset").style.visibility = "hidden";
@@ -128,9 +129,8 @@ function playRound(playerSelection, computerSelection) {
     computerIndex - playerIndex !== -2
   ) {
     playerScore++;
+    win = "win";
     endRound();
-    //    document.getElementById("win").innerHTML = "WIN!";
-    //    console.log("win");
   }
   //CHECK optionsArray[2] DOES NOT BEAT optionsArray[0]; COMPUTER SCORES
   else if (
@@ -138,21 +138,25 @@ function playRound(playerSelection, computerSelection) {
     computerIndex - playerIndex !== 2
   ) {
     computerScore++;
+    win = "lose";
     endRound();
   }
   //optionsArray[0] BEATS optionsArray[2]; PLAYER SCORES
   else if (computerIndex == 2 && playerIndex == 0) {
     playerScore++;
+    win = "win";
     endRound();
   }
   //optionsArray[0] BEATS optionsArray[2]; COMPUTER SCORES
   else if (playerIndex == 2 && computerIndex == 0) {
     computerScore++;
+    win = "lose";
     endRound();
   }
   //CHECKS FOR TIES
   else if (playerIndex == computerIndex) {
     tieScore++;
+    win = "tie";
     endRound();
   }
 
@@ -189,6 +193,27 @@ function playRound(playerSelection, computerSelection) {
 
 //ROUND CONCLUSION/ANIMATION DELAY
 function endRound() {
+  //WIN-LOSE-TIE MESSAGE
+  function roundResult() {
+    let result = win;
+    if (result == "win") {
+      document.getElementById("win").innerHTML = "WIN!";
+      document.getElementById("win").style.zIndex = 1000;
+      console.log("win");
+    }
+    if (result == "lose") {
+      document.getElementById("win").innerHTML = "LOSE!";
+      document.getElementById("win").style.zIndex = 1000;
+      console.log("lsoe");
+    }
+    if (result == "tie") {
+      document.getElementById("win").innerHTML = "TIE!";
+      document.getElementById("win").style.zIndex = 1000;
+      console.log("tie");
+    }
+  }
+  roundResult();
+
   //ENABLE BUTTONS
   function buttonEnable() {
     let buttonCount = document.getElementsByTagName("button");
@@ -217,14 +242,38 @@ function endRound() {
     document.body.style.cursor = "progress";
     buttonDisable();
   }, 0);
+
   setTimeout(() => {
     //ADD ADDITIONAL FUNCTIONS HERE (IF NEEDED)
+    document.getElementById("win").innerHTML = "";
+    document.getElementById("win").style.zIndex = 0;
+  }, 500);
+
+  setTimeout(() => {
+    roundResult();
   }, 750);
+
+  setTimeout(() => {
+    //ADD ADDITIONAL FUNCTIONS HERE (IF NEEDED)
+    document.getElementById("win").innerHTML = "";
+    document.getElementById("win").style.zIndex = 0;
+  }, 1000);
+
+  setTimeout(() => {
+    roundResult();
+  }, 1250);
+
+  setTimeout(() => {
+    //ADD ADDITIONAL FUNCTIONS HERE (IF NEEDED)
+    document.getElementById("win").innerHTML = "";
+    document.getElementById("win").style.zIndex = 0;
+  }, 1500);
+
   setTimeout(() => {
     document.body.style.cursor = "default";
     buttonEnable();
     cssReset();
-  }, 1500);
+  }, 1750);
 }
 
 function cssReset() {
