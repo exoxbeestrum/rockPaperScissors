@@ -33,13 +33,16 @@
 
 //SET VARIABLES
 const optionsArray = ["rock", "paper", "scissors"]; //SET VARIABLES
-const buttonCount = document.getElementsByClassName("button"); //GET # OF BUTTONS
+const buttonCount = document.getElementsByClassName("button"); //GET # OF .button CLASSES
+const buttonTagCount = document.getElementsByTagName("button"); //GET # OF <button> TAGS
 
 let playerSelection = null;
 let computerSelection = null;
 let playerScore = 0;
 let computerScore = 0;
 let tieScore = 0;
+let message = undefined; //SET ROUND/GAME RESULT MESSAGE
+let winTotal = 3; //SET TOTAL POINTS TO WIN
 let win = undefined;
 
 //HIDE RESET BUTTON
@@ -117,6 +120,7 @@ function choiceIntro() {
     }
   }
 }
+//END INTRO ANIMATIONS
 
 //PLAY THE ROUND
 function playRound(playerSelection, computerSelection) {
@@ -129,6 +133,7 @@ function playRound(playerSelection, computerSelection) {
     computerIndex - playerIndex !== -2
   ) {
     playerScore++;
+    tieScore++;
     win = "win";
     endRound();
   }
@@ -138,26 +143,37 @@ function playRound(playerSelection, computerSelection) {
     computerIndex - playerIndex !== 2
   ) {
     computerScore++;
+    tieScore++;
     win = "lose";
     endRound();
   }
   //optionsArray[0] BEATS optionsArray[2]; PLAYER SCORES
   else if (computerIndex == 2 && playerIndex == 0) {
     playerScore++;
+    tieScore++;
     win = "win";
     endRound();
   }
   //optionsArray[0] BEATS optionsArray[2]; COMPUTER SCORES
   else if (playerIndex == 2 && computerIndex == 0) {
     computerScore++;
+    tieScore++;
     win = "lose";
     endRound();
   }
-  //CHECKS FOR TIES
+  //CHECKS FOR TIES On NON-WINNING ROUNDS
+  else if (
+    (playerIndex == computerIndex && playerScore !== winTotal) ||
+    computerScore !== winTotal
+  ) {
+    tieScore++;
+    win = "tie";
+    endRound();
+  }
+  //CHECKS FOR TIES (PROBABLY NOT NEEDED)
   else if (playerIndex == computerIndex) {
     tieScore++;
     win = "tie";
-    console.log("HERE?");
     endRound();
   }
 
@@ -169,13 +185,15 @@ function playRound(playerSelection, computerSelection) {
     document.getElementById("player-score").innerHTML = playerScore;
     document.getElementById("comp-score").innerHTML = computerScore;
     //PLAYER WINS
-    if (playerScore == 5) {
+    if (playerScore == winTotal) {
       document.getElementById("win").innerHTML = "YOU WIN!";
+      tieScore = -6; //BURIES THE TIE SCORE; PREVENTS FLASH ON playAgain();
       endGame();
     }
     //PLAYER LOSES
-    if (computerScore == 5) {
+    if (computerScore == winTotal) {
       document.getElementById("win").innerHTML = "YOU LOSE!";
+      tieScore = -6; //BURIES THE TIE SCORE; PREVENTS FLASH ON playAgain();
       endGame();
     }
     //DISABLE BUTTONS
@@ -184,6 +202,8 @@ function playRound(playerSelection, computerSelection) {
         document.getElementsByClassName("button")[i].disabled = true;
         document.getElementById("reset").innerHTML = "Play Again?";
         document.getElementById("reset").style.visibility = "visible";
+        document.getElementById("reset").style.backgroundColor = "#51b266";
+        document.getElementById("reset").style.color = "#fff";
       }
       optionScrollUp();
       scoreCardDown();
@@ -191,27 +211,27 @@ function playRound(playerSelection, computerSelection) {
     }
   }
 }
+//END PLAY THE ROUND
 
 //ROUND CONCLUSION/ANIMATION DELAY
 function endRound() {
   //WIN-LOSE-TIE MESSAGE
   function roundResult() {
     let result = win;
-    if (result == "win" && playerScore !== 5) {
+    if (result == "win" && playerScore !== winTotal) {
       document.getElementById("win").innerHTML = "WIN!";
       document.getElementById("win").style.zIndex = 1000;
-      console.log(playerScore);
     }
-    if (result == "lose" && computerScore !== 5) {
+    if (result == "lose" && computerScore !== winTotal) {
       document.getElementById("win").innerHTML = "LOSE!";
       document.getElementById("win").style.zIndex = 1000;
-      console.log(computerScore);
     }
-    if (result == "tie") {
-      document.getElementById("win").innerHTML = "TIE!";
+    if (result == "tie" && tieScore >= 0) {
+      document.getElementById("win").innerHTML = "TIE";
       document.getElementById("win").style.zIndex = 1000;
-      console.log(computerScore);
-//      console.log("tie");
+    }
+    if ((result = "tie")) {
+      tieScore++;
     }
   }
 
@@ -224,7 +244,7 @@ function endRound() {
       buttonCount[i].style.boxShadow = "2px 2px 0 #5b5b5b";
       buttonCount[i].style.color = "#000";
       buttonCount[i].style.textDecoration = "none";
-      buttonCount[i].style.cursor = "default";
+      buttonCount[i].style.cursor = "grab";
     }
   }
   //DISABLE BUTTONS
@@ -245,38 +265,78 @@ function endRound() {
   }, 0);
 
   setTimeout(() => {
+    if (playerScore == winTotal) {
+      document.getElementById("win").innerHTML = "YOU WIN!";
+    }
+    if (computerScore == winTotal) {
+      document.getElementById("win").innerHTML = "YOU LOSE!";
+    }
     roundResult();
-  }, 750);
+  }, 600);
 
   setTimeout(() => {
+    if (playerScore == winTotal) {
+      document.getElementById("win").innerHTML = "YOU WIN!";
+    }
+    if (computerScore == winTotal) {
+      document.getElementById("win").innerHTML = "YOU LOSE!";
+    }
+    //INTENDED BLINK EFFECT
     document.getElementById("win").innerHTML = "";
     document.getElementById("win").style.zIndex = 0;
-  }, 1250);
+  }, 1100);
 
   setTimeout(() => {
+    if (playerScore == winTotal) {
+      document.getElementById("win").innerHTML = "YOU WIN!";
+    }
+    if (computerScore == winTotal) {
+      document.getElementById("win").innerHTML = "YOU LOSE!";
+    }
     roundResult();
-  }, 1750);
+  }, 1350);
 
   setTimeout(() => {
-    document.getElementById("win").innerHTML = "";
-    document.getElementById("win").style.zIndex = 0;
-  }, 2250);
+    if (playerScore == winTotal) {
+      document.getElementById("win").innerHTML = "YOU WIN!";
+    }
+    if (computerScore == winTotal) {
+      document.getElementById("win").innerHTML = "YOU LOSE!";
+    } else {
+      document.getElementById("win").innerHTML = "";
+      document.getElementById("win").style.zIndex = 0;
+    }
+  }, 1600);
 
   setTimeout(() => {
+    if (playerScore == winTotal) {
+      document.getElementById("win").innerHTML = "YOU WIN!";
+    }
+    if (computerScore == winTotal) {
+      document.getElementById("win").innerHTML = "YOU LOSE!";
+    }
     roundResult();
-  }, 2750);
+  }, 1850);
 
   setTimeout(() => {
-    document.getElementById("win").innerHTML = "";
-    document.getElementById("win").style.zIndex = 0;
-  }, 3250);
+    if (playerScore == winTotal) {
+      document.getElementById("win").innerHTML = "YOU WIN!";
+    }
+    if (computerScore == winTotal) {
+      document.getElementById("win").innerHTML = "YOU LOSE!";
+    } else {
+      document.getElementById("win").innerHTML = "";
+      document.getElementById("win").style.zIndex = 0;
+    }
+  }, 2100);
 
   setTimeout(() => {
     document.body.style.cursor = "default";
     buttonEnable();
     cssReset();
-  }, 3500);
+  }, 2350);
 }
+//END ROUND CONCLUSION/ANIMATION DELAY
 
 function cssReset() {
   document.querySelectorAll(".button").forEach((button) => {
@@ -295,9 +355,16 @@ function cssReset() {
 document.getElementById("reset").addEventListener("click", () => {
   playerScore = 0;
   computerScore = 0;
+  tieScore--;
   playRound();
   optionScrollDown();
   scoreCardUp();
+});
+
+//RESET ROLLOVER STATE
+document.getElementById("reset").addEventListener("mouseover", () => {
+  document.getElementById("reset").style.backgroundColor = "#51b266";
+  document.getElementById("reset").style.color = "#fff";
 });
 
 /* SCORECARD SCROLL OUTS/INS */
@@ -450,6 +517,15 @@ function dragElement(elem) {
 }
 //DRAG THE SCORECARD
 dragElement(elem);
+
+//CURSOR DOWN STATE
+for (let i = 0; i < buttonTagCount.length; i++) {
+  document
+    .getElementsByTagName("button")
+    [i].addEventListener("mousedown", () => {
+      document.getElementsByTagName("button")[i].style.cursor = "grabbing";
+    });
+}
 
 //SCROLLING TITLE BAR
 //via: MarqueeTitle v4.0 | MIT License | git.io/vQZbs
