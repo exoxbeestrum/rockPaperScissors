@@ -1,4 +1,4 @@
-// Updated: 3/1/2023
+// Updated: 3/3/2023
 
 /* ---------------------------------------------------*/
 /* TABLE OF CONTENTS                                  */
@@ -20,6 +20,7 @@
 /* --- MATCH ANIMATIONs (SET TIMEOUT)                 */
 /* CSS RESET                                          */
 /* RESET GAME                                         */
+/* RESET ROLLOVER STATE                               */
 /* SCORECARD SCROLL OUTS/INS                          */
 /* SCORECARD SCROLL-UP                                */
 /* SCORECARD SCROLL-DOWN                              */
@@ -28,6 +29,7 @@
 /* PLAY AGAIN BUTTON REVEAL                           */
 /* DRAGGABLE SCORECARD FUNCTION                       */
 /* DRAG THE SCORECARD                                 */
+/* CURSOR DOWN STATE                                  */
 /* SCROLLING TITLE BAR                                */
 /* ---------------------------------------------------*/
 
@@ -338,6 +340,7 @@ function endRound() {
 }
 //END ROUND CONCLUSION/ANIMATION DELAY
 
+//CSS RESET
 function cssReset() {
   document.querySelectorAll(".button").forEach((button) => {
     button.addEventListener("mouseover", () => {
