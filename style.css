@@ -24,7 +24,7 @@ button {
 
 /* SCORECARD ET AL. ***/
 #container {
-  min-width: 194px;;
+  min-width: 194px;
   position: absolute;
   text-align: center;
   top: 2%;
@@ -131,6 +131,7 @@ button#reset:hover,
 #options > button:hover {
   background: #51b266;
   color: #fff;
+  cursor: grab;
 }
 
 button#play:active,
@@ -138,6 +139,7 @@ button#reset:active,
 #options > button:active {
   box-shadow: 0 0 #5b5b5b;
   color: #51b266;
+  cursor: grabbing;
 }
 
 button#play,
@@ -184,6 +186,7 @@ button#play {
   color: #f00;
   filter: drop-shadow(6px 6px 0 #fc0);
   font: normal 20em "Press Start 2P", monospace;
+  opacity: 0.8;
   position: absolute;
   z-index: 400;
   top: 8%;
