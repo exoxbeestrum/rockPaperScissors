@@ -1,16 +1,36 @@
 /* GOOGLE FONTS   */
-@import url("https://fonts.googleapis.com/css2?family=Climate+Crisis&family=Fira+Sans+Extra+Condensed:wght@200;500&family=Press+Start+2P&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Climate+Crisis&family=Fira+Sans+Extra+Condensed:wght@200;500&family=Press+Start+2P&family=Righteous&display=swap");
 
 html,
 body {
-  background: #fda2be;
-  background-image: url("imgs/bg_checker_pattern.png");
-  background-repeat: repeat;
+  background: #fda2be url("imgs/bg_checker_pattern.png") repeat;
   width: 100vw;
   height: 100vh;
   padding: 0;
   margin: 0;
   font-size: 10px;
+}
+
+marquee {
+  align-items: center;
+  animation: blinking 2s infinite;
+  background: #fff;
+  border-bottom: 3px solid #000;
+  color: #000;
+  display: flex;
+  font: lighter 21px "Fira Sans Extra Condensed", serif;
+  padding: 12px 0;
+}
+@keyframes blinking {
+  0% {
+    color: #000;
+  }
+  50% {
+    color: transparent;
+  }
+  100% {
+    color: #000;
+  }
 }
 
 h1 {
@@ -24,11 +44,11 @@ button {
 
 /* SCORECARD ET AL. ***/
 #container {
+  left: 18px;
   min-width: 194px;
   position: absolute;
   text-align: center;
-  top: 2%;
-  left: 2%;
+  top: 64px;
   z-index: 500;
 }
 
@@ -57,8 +77,7 @@ button {
 .scorecard {
   background-color: #fff;
   box-shadow: 3px 3px #000;
-  font-family: "Fira Sans Extra Condensed", sans-serif;
-  font-weight: 200;
+  font-family: 200 "Fira Sans Extra Condensed", sans-serif;
   padding: 22px 16px 36px;
   position: relative;
   z-index: 999;
@@ -66,18 +85,13 @@ button {
 .scorecard h1,
 .scorecard h3 {
   display: inline;
-  font-family: "Fira Sans Extra Condensed", sans-serif;
-  font-size: 2.2em;
-  font-weight: 500;
+  font: 500 italic 2.2em "Fira Sans Extra Condensed", sans-serif;
   text-align: center;
-  font-style: italic;
   margin: 0;
   padding: 4px 16px;
 }
 .scorecard > h1 {
-  font-size: 3em;
-  font-weight: 800;
-  font-style: oblique;
+  font: 800 oblique 3em "Fira Sans Extra Condensed", sans-serif;
 }
 
 .player-score,
@@ -86,7 +100,6 @@ button {
   background: #51b266;
   display: flex;
   box-shadow: 2px 2px #5b5b5b;
-  justify-content: center;
   justify-content: space-between;
   margin-top: 8px;
 }
@@ -116,9 +129,7 @@ button#reset,
   background: #fff;
   display: block;
   box-shadow: 2px 2px #5b5b5b;
-  font-family: "Fira Sans Extra Condensed", sans-serif;
-  font-size: 1.8em;
-  font-weight: 200;
+  font: 200 1.8em "Fira Sans Extra Condensed", sans-serif;
   margin: 4px 0;
   padding: 2px 0;
   position: relative;
@@ -172,9 +183,9 @@ button#play {
 #comp-choice {
   color: #51b266;
   filter: drop-shadow(2px 2px #5b5b5b);
-  position: absolute;
-  left: 0;
   font: oblique 15em "Climate Crisis", cursive;
+  left: 0;
+  position: absolute;
   text-transform: uppercase;
 }
 #comp-choice {
